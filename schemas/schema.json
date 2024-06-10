@@ -1,0 +1,16 @@
+{
+	"endpoints": [
+		{
+			"path": "/random/string",
+			"type": "string"
+		},
+		{
+			"path": "/random/number",
+			"type": "number"
+		},
+		{
+			"path": "/random/bool",
+			"type": "bool"
+		}
+	]
+}
