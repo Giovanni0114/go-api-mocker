@@ -2,7 +2,7 @@ package schema
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 )
 
 type Endpoint struct {
@@ -10,16 +10,29 @@ type Endpoint struct {
 	Type string `json:"type"`
 }
 
+type Config struct {
+	Port string `json:"port"`
+	Key  string `json:"key"`
+}
+
 type Schema struct {
+	Config    Config     `json:"config"`
 	Endpoints []Endpoint `json:"endpoints"`
 }
 
-func LoadSchema(filePath string) (Schema, error) {
-	var schema Schema
-	data, err := ioutil.ReadFile(filePath)
+var instance *Schema = &Schema{}
+
+func GetSchema() *Schema {
+	return instance
+}
+
+func LoadSchema(filePath string) error {
+	data, err := os.ReadFile(filePath)
+
 	if err != nil {
-		return schema, err
+		return err
 	}
-	err = json.Unmarshal(data, &schema)
-	return schema, err
+
+	err = json.Unmarshal(data, instance)
+	return err
 }
