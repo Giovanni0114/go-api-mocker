@@ -2,7 +2,6 @@ package apiconfig
 
 import (
 	"go-api-mocker/pkg/schema"
-	"log"
 	"strconv"
 )
 
@@ -12,17 +11,10 @@ type ApiConfig struct {
 
 var instance *ApiConfig = &ApiConfig{}
 
-func LoadConfig() bool {
-	config := schema.GetSchema().Config
-	data, err := strconv.Atoi(config.Port)
-
-	if err != nil {
-		log.Fatalf("[ERROR] verifyConfig: port is not a number, err=%s\n", err.Error())
-		return false
-	}
-	instance.Port = data
-
-	return true
+func LoadConfig() error {
+	data, err := strconv.Atoi(schema.GetSchema().Config.Port)
+	defer func() {instance.Port = data}()
+	return err
 }
 
 func GetPortFormatted() string {

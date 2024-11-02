@@ -4,16 +4,45 @@
   },
   "endpoints": [
     {
-      "path": "/random/string",
-      "type": "string"
+      "path": "/string",
+      "type": "string",
+      "options": {
+        "const_value": "QWERTY_123_!@#"
+      }
     },
     {
-      "path": "/random/number",
-      "type": "number"
+      "path": "/number",
+      "type": "number",
+      "options": {
+        "range": "1-100"
+      }
     },
     {
-      "path": "/random/bool",
+      "path": "/primes",
+      "type": "number",
+      "options": {
+        "choise": [
+          2,
+          3,
+          5,
+          7,
+          11,
+          13,
+          17,
+          19
+        ]
+      }
+    },
+    {
+      "path": "/bool",
       "type": "bool"
+    },
+    {
+      "path": "/const",
+      "type": "const",
+      "options": {
+        "value": "Lorem Ipsum"
+      }
     }
   ]
 }

@@ -11,7 +11,7 @@ func SetupRoutes() {
 	for _, endpoint := range schema.GetSchema().Endpoints {
 		endpoint := endpoint
 		http.HandleFunc(endpoint.Path, func(w http.ResponseWriter, r *http.Request) {
-			value := random.RandomValue(endpoint.Type)
+			value := random.RandomValue(endpoint)
 			response, err := json.Marshal(value)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
